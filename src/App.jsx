@@ -1,11 +1,9 @@
 import React from 'react'
-import ListItems from './ListItems'
-
-
+import ProfileCard from './ProfileCard'
 
 const App = () => {
   return (
-    <ListItems />
+    <div><ProfileCard/></div>
   )
 }
 
