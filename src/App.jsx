@@ -1,40 +1,20 @@
-import React, { useState } from 'react'
-
-
-
+import React from 'react'
 
 const App = () => {
+ 
+  const fruits = ["apple", "banana", "cherry", "momos"]
 
-const [isDark, setIsDark] = useState(false);
-
-function toggleTheme() {
-  setIsDark(!isDark);
-}
 
 
   return (
-  <div 
-  style={{
-    margin: 0,
-    backgroundColor: isDark? "black": "white",
-    color: isDark? "white": "black",
-    height: "100vh",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    flexDirection: "column"
-  }}
-   >
+    <div style={{padding: "20px", fontSize: "20px", border: "2px solid gray", borderRadius: "10px", boxShadow: "0 4px 10px 2px" }} >
+      
+      <h2>Fruit List</h2>
 
-    <h1>{isDark ? "Dark Mode": "Light Mode"}</h1>
-
-    <button onClick={toggleTheme} style={{
-      borderRadius: "10px", padding: "10px"
-    }} >
-      {isDark ? "Switch to Light Mode ☀️": "Switch to Dark Mode ✨"}
-    </button>
-
-  </div>
+      {fruits.map((item) => {
+        return <p>{item}</p>
+      })}
+    </div>
   )
 }
 
