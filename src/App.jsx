@@ -1,70 +1,28 @@
 import React, { useState } from 'react'
 
 const App = () => {
- 
-  const [toDo, setToDo ] = useState([]);
-  const [input, setInput] = useState("");
-
-  function add() {
-    if(input.trim() === "") {
-      alert("Link to bsdk kuch");
-      return;
-    }
-
-
-    setToDo([...toDo, input]);
-    setInput("");
-  }
-
+  
+  const [count, setCount] = useState(0);
 
   return (
-    <div
-    style={{
-      border: "2px solid gray",
-      padding: "10px",
-      borderRadius: "10px",
-      textAlign: "center",
-    }}
-    >
-      <h2>To-Do List</h2>
-      <input
-      style={{
-        padding: "3px",
-        borderRadius: "5px",
-        outline: "none",
-        
-      }}
-      type="text" placeholder='Add item...'
-      value={input}
-      onChange={(e) => {
-        setInput(e.target.value)
-      }}
-      />
-
+    <div>
+      <h2>{count}</h2>
       <button
       style={{
-        backgroundColor: "red",
+        backgroundColor: "#e80d48",
         color: "white",
-        marginLeft: "10px",
-        borderRadius: "4px",
-        padding: "2.5px 5px",
-        border: "none"
-
+        padding: "4px 3px",
       }}
-      onClick={add}
-      >Add
-      </button>
-
-
-      {toDo.map((item,index) => {
-       return <p key={index}>{item}</p>
-      })}
-
+      onClick={ () => setCount(count+10)} >+</button>
+      <button
+      style={{
+        backgroundColor: "#1ef41a",
+        color: "white",
+        padding: "4px 3px",
+      }}
+      onClick={ () => setCount(count-10)} >-</button>
     </div>
   )
 }
 
 export default App
- 
-
-
