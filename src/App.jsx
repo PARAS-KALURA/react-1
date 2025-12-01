@@ -24,7 +24,7 @@ const App = () => {
       display: "flex",
       flexDirection: "column",
       alignItems: "center",
-      gap: "21px",
+      gap: "22px",
       justifyContent: "center"
     }}>
 
