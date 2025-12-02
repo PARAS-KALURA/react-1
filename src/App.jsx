@@ -1,23 +1,14 @@
-import React, { useState } from 'react'
+import React, { useState } from "react";
 
 const App = () => {
-
   const [active, setActive] = useState(false);
   const [startTime, setStartTime] = useState(null);
   const [result, setResult] = useState(null);
-
-  const [position, setPosition] = useState({ top: 0, left: 0 });
 
   const startGame = () => {
     setActive(true);
     setResult(null);
     setStartTime(Date.now());
-
-    // generate random position
-    const randomTop = Math.floor(Math.random() * (window.innerHeight - 200));
-    const randomLeft = Math.floor(Math.random() * (window.innerWidth - 200));
-
-    setPosition({ top: randomTop, left: randomLeft });
   };
 
   const handleClick = () => {
@@ -27,38 +18,25 @@ const App = () => {
   };
 
   return (
-    <div style={{ height: "100vh", position: "relative" }}>
+    <div style={{ height: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: "20px" }}>
+      
+      <h2>⚡ Reaction Game</h2>
 
-      <h2 style={{ textAlign: "center" }}>⚡ Reaction Time Game</h2>
-
-      <button
-        onClick={startGame}
-        style={{
-          display: "block",
-          margin: "20px auto",
-          padding: "10px",
-          cursor: "pointer",
-        }}
-      >
-        Start Game
-      </button>
+      <button onClick={startGame}>Start</button>
 
       {active && (
-        <div
+        <div 
           onClick={handleClick}
           style={{
-            position: "absolute",
-            top: position.top,
-            left: position.left,
-            backgroundColor: "red",
-            height: "100px",
             width: "100px",
-            cursor: "pointer",
+            height: "100px",
+            background: "red",
+            cursor: "pointer"
           }}
         ></div>
       )}
 
-      {result !== null && <h3 style={{ textAlign: "center" }}>Your reaction time: {result} ms</h3>}
+      {result && <h3>Reaction Time: {result} ms</h3>}
     </div>
   );
 };
