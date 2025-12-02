@@ -6,10 +6,18 @@ const App = () => {
   const [startTime, setStartTime] = useState(null);
   const [result, setResult] = useState(null);
 
+  const [position, setPosition] = useState({ top: 0, left: 0 });
+
   const startGame = () => {
     setActive(true);
     setResult(null);
     setStartTime(Date.now());
+
+    // generate random position
+    const randomTop = Math.floor(Math.random() * (window.innerHeight - 200));
+    const randomLeft = Math.floor(Math.random() * (window.innerWidth - 200));
+
+    setPosition({ top: randomTop, left: randomLeft });
   };
 
   const handleClick = () => {
@@ -19,22 +27,16 @@ const App = () => {
   };
 
   return (
-    <div style={{
-      height: "100vh",
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-      gap: "28px",
-      justifyContent: "center"
-    }}>
+    <div style={{ height: "100vh", position: "relative" }}>
 
-      <h2>⚡ Reaction Time Game</h2>
+      <h2 style={{ textAlign: "center" }}>⚡ Reaction Time Game</h2>
 
       <button
         onClick={startGame}
         style={{
-          padding: "5px",
-          fontSize: "13px",
+          display: "block",
+          margin: "20px auto",
+          padding: "10px",
           cursor: "pointer",
         }}
       >
@@ -45,17 +47,18 @@ const App = () => {
         <div
           onClick={handleClick}
           style={{
+            position: "absolute",
+            top: position.top,
+            left: position.left,
             backgroundColor: "red",
-            height: "200px",
-            width: "200px",
-            cursor: "pointer"
+            height: "100px",
+            width: "100px",
+            cursor: "pointer",
           }}
         ></div>
       )}
 
-      {/* Show result OUTSIDE the box */}
-      {result !== null && <h3>Your reaction time: {result} ms</h3>}
-
+      {result !== null && <h3 style={{ textAlign: "center" }}>Your reaction time: {result} ms</h3>}
     </div>
   );
 };
