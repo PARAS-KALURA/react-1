@@ -1,69 +1,64 @@
 import React, { useState } from 'react'
 
-
 const App = () => {
 
-const [active, setActive] = useState(false);
-const [startTime, setStartTime] = useState(null);
-const [result, setResult] = useState(null);
+  const [active, setActive] = useState(false);
+  const [startTime, setStartTime] = useState(null);
+  const [result, setResult] = useState(null);
+  const [position, setPosition] = useState({ top: 0, left: 0 });
 
-const startGame = () => {
-  setActive(false);
-  setResult(null)
-  setStartTime(Date.now());
+  const startGame = () => {
+    setActive(true);
+    setResult(null);
+    setStartTime(Date.now());
 
-   const delay = Math.floor(Math.random() * 2000) + 1000; 
-    // random time between 1000ms - 3000ms
+    // GENERATE RANDOM POSITION
+    const randomTop = Math.floor(Math.random() * (window.innerHeight - 120));
+    const randomLeft = Math.floor(Math.random() * (window.innerWidth - 120));
 
-    setTimeout(() => {
-      setActive(true);
-      setStartTime(Date.now());
-    }, delay);
+    setPosition({ top: randomTop, left: randomLeft });
+  };
 
-
-}
-
-const handleClick = () => {
-  const endTime = Date.now();
-  setResult(endTime - startTime);
-  setActive(false);
-}
+  const handleClick = () => {
+    const endTime = Date.now();
+    setResult(endTime - startTime);
+    setActive(false);
+  };
 
   return (
-    <div
-    style={{
-      textAlign: "center",
-      marginTop: '40px',
-    }}
-    >
-            <h2>⚡ Reaction Game</h2>
+    <div style={{ height: "100vh", width: "100vw", position: "relative" }}>
+      
+      <h2 style={{ textAlign: "center" }}>⚡ Reaction Game</h2>
 
-            <button
-            onClick={startGame}
-            style={{
-              marginTop: "20px",
-              padding: "5px",
-            }}
-            >Start Time</button>
+      <button 
+        onClick={startGame} 
+        style={{ display: "block", margin: "20px auto", padding: "8px" }}
+      >
+        Start
+      </button>
 
-            {result !==null && (<h3  
+      {active && (
+        <div
+          onClick={handleClick}
           style={{
-            marginTop: "20px",
+            position: "absolute",
+            top: position.top,
+            left: position.left,
+            height: "101px",
+            width: "100px",
+            backgroundColor: "red",
+            cursor: "pointer",
           }}
-          >Your reaction: {result}ms</h3>)}
+        ></div>
+      )}
 
-           { active && (<div
-           onClick={handleClick}
-            style={{
-              margin: "10px auto",
-              height: "100px",
-              width: "100px",
-              backgroundColor: "red",
-            }}
-            ></div>)}
-
+      {result !== null && (
+        <h3 style={{ textAlign: "center" }}>
+          Your reaction time: {result} ms
+        </h3>
+      )}
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;
