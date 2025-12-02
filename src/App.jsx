@@ -4,12 +4,18 @@ import React, { useState } from 'react'
 const App = () => {
 
 const [active, setActive] = useState(false);
+const [startTime, setStartTime] = useState(null);
+const [result, setResult] = useState(null);
 
 const startGame = () => {
   setActive(true);
+  setResult(null)
+  setStartTime(Date.now());
 }
 
 const handleClick = () => {
+  const endTime = Date.now();
+  setResult(endTime - startTime);
   setActive(false);
 }
 
@@ -29,6 +35,12 @@ const handleClick = () => {
               padding: "5px",
             }}
             >Start Time</button>
+
+            {result && (<h3  
+          style={{
+            marginTop: "20px",
+          }}
+          >Your reaction: {result}ms</h3>)}
 
            { active && (<div
            onClick={handleClick}
