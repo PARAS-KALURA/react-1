@@ -8,9 +8,19 @@ const [startTime, setStartTime] = useState(null);
 const [result, setResult] = useState(null);
 
 const startGame = () => {
-  setActive(true);
+  setActive(false);
   setResult(null)
   setStartTime(Date.now());
+
+   const delay = Math.floor(Math.random() * 2000) + 1000; 
+    // random time between 1000ms - 3000ms
+
+    setTimeout(() => {
+      setActive(true);
+      setStartTime(Date.now());
+    }, delay);
+
+
 }
 
 const handleClick = () => {
@@ -36,7 +46,7 @@ const handleClick = () => {
             }}
             >Start Time</button>
 
-            {result && (<h3  
+            {result !==null && (<h3  
           style={{
             marginTop: "20px",
           }}
